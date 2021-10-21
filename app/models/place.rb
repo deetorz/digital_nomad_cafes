@@ -1,6 +1,5 @@
 class Place < ApplicationRecord
-  def initialize(name, location)
-    @name = name
-    @location = location
-  end
+  include ActionView::Helpers::TextHelper
+  validates :name, presence: true
+  validates :location, presence: true
 end
