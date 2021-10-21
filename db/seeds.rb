@@ -12,7 +12,7 @@ Place.destroy_all
 
 puts "Seeding the database..."
 
-10.times do
+30.times do
   Place.create(name: Faker::Restaurant.name, location: Faker::Address.full_address)
 end
 
