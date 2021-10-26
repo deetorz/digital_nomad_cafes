@@ -2,10 +2,12 @@
 <div id="map"
      data-markers="<%= @markers.to_json %>"
 ></div>
-<div class="card-outer">
-  <div class="card-picture"></div>
-  <div class="card-info"></div>
+<div class="d-flex justify-content-center">
+  <% Place.all.each do |place| %>
+    <div class="card-info">
+      <%= image_tag("placeholder-restaurant.png", class: "card-img") %>
+      <p class="m-3"><%= place.name %></p>
+      <p class="m-3"><%= place.address %></p>
+    </div>
+  <% end %>
 </div>
-<% Place.all.each do |place| %>
-  <p class="m-3"><%= "#{place.name} - #{place.address}" %></p>
-<% end %>
