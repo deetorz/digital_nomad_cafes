@@ -1,6 +1,11 @@
-<h1>Test Page</h1>
+<h1>Work Spaces for Digital Nomads</h1>
 <div id="map"
-     style="width: 100%; 
-            height: 600px;"
      data-markers="<%= @markers.to_json %>"
 ></div>
+<div class="card-outer">
+  <div class="card-picture"></div>
+  <div class="card-info"></div>
+</div>
+<% Place.all.each do |place| %>
+  <p class="m-3"><%= "#{place.name} - #{place.address}" %></p>
+<% end %>
