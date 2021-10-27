@@ -7,7 +7,7 @@ class PlacesController < ApplicationController
       {
         lat: place.latitude,
         lng: place.longitude,
-        # infoWindow: { content: render_to_string(partial: "/flats/map_box", locals: { flat: flat }) }
+        infoWindow: { content: render_to_string(partial: "/places/info_window", locals: { place: place }) }
         # Uncomment the above line if you want each of your markers to display a info window when clicked
         # (you will also need to create the partial "/flats/map_box")
       }
