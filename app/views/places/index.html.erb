@@ -1,7 +1,10 @@
 <h1>Work Spaces for Digital Nomads</h1>
-<div id="map"
-     data-markers="<%= @markers.to_json %>"
-></div>
+<%= react_component("Map", {
+  googleApiKey: @google_api_key,
+  center: @map_center,
+  zoom: @map_zoom,
+  markers: [@markers]
+}) %>
 <div class="d-flex justify-content-center">
   <% Place.all.each do |place| %>
     <div class="card-info">
@@ -11,4 +14,5 @@
     </div>
   <% end %>
 </div>
-<%= react_component("Map") %>
+
+
