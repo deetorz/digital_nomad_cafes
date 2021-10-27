@@ -6,7 +6,8 @@
   <% Place.all.each do |place| %>
     <div class="card-info">
       <%= image_tag("placeholder-restaurant.png", class: "card-img") %>
-      <p class="m-3"><%= place.name %></p>
+      <hr>
+      <%= link_to "#{place.name}", place_path(place), class:"m-3" %>
       <p class="m-3"><%= place.address %></p>
     </div>
   <% end %>
