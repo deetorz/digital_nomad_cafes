@@ -36,18 +36,23 @@ const containerStyle = {
 };
 
 const Map = (props) => {
+  const [selected, setSelected] = useState(null)
+
   const position = {
     lat: props.center[0],
     lng: props.center[1],
   };
 
-  const mapMarkers = props.markers[0].map(markerInfo => 
+  const mapMarkers = props.markers[0].map(marker => 
     <Marker
-      key={markerInfo.id}
+      key={marker.id}
       animation={2}
       position={{
-        lat: markerInfo.lat,
-        lng: markerInfo.lng,
+        lat: marker.lat,
+        lng: marker.lng,
+      }}
+      onClick={() => {
+        setSelected(marker)
       }}
     />
   )
