@@ -65,6 +65,19 @@ const Map = (props) => {
     >
       { /* Child components, such as markers, info windows, etc. */ }
       { mapMarkers }
+
+      {selected ? 
+        (<InfoWindow 
+            position={{ lat: selected.lat, lng: selected.lng }}
+            onCloseClick={() => {
+              setSelected(null)
+            }}
+          >
+          <div style={{ maxWidth: 120 }}>
+            <p>{ selected.name }</p>
+            <small>{ selected.address }</small>
+          </div>
+        </InfoWindow>) : null}
     </GoogleMap>
   )
 }
