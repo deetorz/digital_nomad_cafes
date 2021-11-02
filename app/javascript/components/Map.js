@@ -18,20 +18,6 @@ const Map = (props) => {
     lat: props.center[0],
     lng: props.center[1],
   };
-
-  // const mapMarkers = props.markers[0].map(marker => 
-  //   <Marker
-  //     key={marker.id}
-  //     animation={2}
-  //     position={{
-  //       lat: marker.lat,
-  //       lng: marker.lng,
-  //     }}
-  //     onClick={() => {
-  //       setSelected(marker)
-  //     }}
-  //   />
-  // )
   
   return (
     <GoogleMap
