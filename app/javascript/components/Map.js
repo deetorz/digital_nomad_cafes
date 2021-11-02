@@ -1,34 +1,10 @@
-// import React from 'react';
-// import GoogleMap from 'google-map-react';
-// import Marker from './Marker'
-
-// const Map = (props) => {
-
-//   const mapMarkers = props.markers[0].map(markerInfo => 
-//       <Marker
-//         key={markerInfo.id}
-//         lat={markerInfo.lat}
-//         lng={markerInfo.lng}
-//       />
-//     )
-
-//   return (
-//     <div style={{width: '100%', height: '400px'}}>
-//       <GoogleMap
-//         bootstrapURLKeys={{key: props.googleApiKey}}
-//         center={props.center}
-//         zoom={props.zoom}
-//       >
-//         { mapMarkers }
-//       </GoogleMap>
-//     </div>
-//   )
-// }
-
-// export default Map
-
 import React, { useState } from 'react'
-import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
+import {
+  GoogleMap,
+  Marker,
+  InfoWindow,
+  MarkerClusterer,
+} from '@react-google-maps/api';
 
 const containerStyle = {
   width: '100%',
@@ -43,19 +19,19 @@ const Map = (props) => {
     lng: props.center[1],
   };
 
-  const mapMarkers = props.markers[0].map(marker => 
-    <Marker
-      key={marker.id}
-      animation={2}
-      position={{
-        lat: marker.lat,
-        lng: marker.lng,
-      }}
-      onClick={() => {
-        setSelected(marker)
-      }}
-    />
-  )
+  // const mapMarkers = props.markers[0].map(marker => 
+  //   <Marker
+  //     key={marker.id}
+  //     animation={2}
+  //     position={{
+  //       lat: marker.lat,
+  //       lng: marker.lng,
+  //     }}
+  //     onClick={() => {
+  //       setSelected(marker)
+  //     }}
+  //   />
+  // )
   
   return (
     <GoogleMap
@@ -63,8 +39,26 @@ const Map = (props) => {
       center={position}
       zoom={props.zoom}
     >
-      { /* Child components, such as markers, info windows, etc. */ }
-      { mapMarkers }
+      <MarkerClusterer
+        minimumClusterSize='10'
+      >
+        {(clusterer) =>
+          props.markers[0].map(marker => 
+            <Marker
+              key={marker.id}
+              animation={2}
+              position={{
+                lat: marker.lat,
+                lng: marker.lng,
+              }}
+              clusterer={clusterer}
+              onClick={() => {
+                setSelected(marker)
+              }}
+            />
+          )
+        }
+      </MarkerClusterer>
 
       {selected ? 
         (<InfoWindow 
