@@ -1,11 +1,14 @@
-.card-info {
-  border: solid 1px black;
-  p {
-    font-weight: bolder;
-  }
-  margin: 8px;
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
-.card-img {
-  height: 200px;
-  width: 200px;
+
+.card-info {
+  margin: 8px;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(10,10,10,0.1);
+  padding: 1rem;
+  max-width: 20rem;
+  min-height: 25rem;
 }

@@ -36,6 +36,7 @@ ReactRailsUJS.useContext(componentRequireContext);
 
 // Google Maps React setup
 import Map from '../components/Map'
+import PlaceCard from '../components/PlaceCard'
 import WebpackerReact from 'webpacker-react'
 
-WebpackerReact.setup({Map})
+WebpackerReact.setup({ Map, PlaceCard })

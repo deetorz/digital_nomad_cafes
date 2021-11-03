@@ -5,15 +5,13 @@
   zoom: @map_zoom,
   markers: [@markers]
 }) %>
-<div class="d-flex justify-content-center">
+<div class="card-container">
   <% Place.all.each do |place| %>
-    <div class="card-info">
-      <%= image_tag("placeholder-restaurant.png", class: "card-img") %>
-      <hr>
-      <%= link_to "#{place.name}", place_path(place), class:"m-3" %>
-      <p class="m-3"><%= place.address %></p>
-    </div>
+    <%= react_component("PlaceCard", {
+      imgSrc: image_url("placeholder-restaurant.png"),
+      url: place_path(place),
+      name: place.name,
+      address: place.address
+    }) %>
   <% end %>
 </div>
-
-
