@@ -5,8 +5,8 @@ const PlaceCard = (props) => {
     <div className="card-info">
       <img className="card-img" src={props.imgSrc} />
       <hr/>
-      <a href={props.url} className="m-3">{props.name}</a>
-      <p className="m-3">{props.address}</p>
+      <a href={props.url} className="my-4">{props.name}</a>
+      <p>{props.address}</p>
     </div>
   )
 }
