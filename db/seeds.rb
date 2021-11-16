@@ -25,18 +25,13 @@
 # puts "Seeded!"
 # puts "#{Place.all.count} places added!"
 require 'faker'
-require 'open-uri'
 
 location_data = File.read('dataset.json')
 locations = JSON.parse(location_data)
 locations.each do |location|
   next if location["locationName"].nil?
-  # p location["locationName"]
-  # place = Place.new
-  # place.name = location["locationName"]
-  url = "https://www.google.com/search?q=#{location['locationName'].gsub(/ /, "+")}"
-  html = URI.open(url)
-  doc = Nokogiri::HTML(html, nil, "utf-8")
+  p location["locationName"]
+  place = Place.new
+  place.name = location["locationName"]
   # address =
-  p doc.text
 end
