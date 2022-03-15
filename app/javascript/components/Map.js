@@ -7,8 +7,8 @@ import {
 } from '@react-google-maps/api';
 
 const containerStyle = {
-  width: '100%',
-  height: '400px'
+  width: '33vw',
+  height: '90vh'
 };
 
 const Map = (props) => {
@@ -40,7 +40,7 @@ const Map = (props) => {
       error => console.log(error)
     }
   }
-  
+
   return (
     <GoogleMap
       mapContainerStyle={containerStyle}
@@ -51,7 +51,7 @@ const Map = (props) => {
         minimumClusterSize='10'
       >
         {(clusterer) =>
-          props.markers[0].map(marker => 
+          props.markers[0].map(marker =>
             <Marker
               key={marker.id}
               animation={2}
@@ -68,8 +68,8 @@ const Map = (props) => {
         }
       </MarkerClusterer>
 
-      {selected ? 
-        (<InfoWindow 
+      {selected ?
+        (<InfoWindow
             position={{ lat: selected.lat, lng: selected.lng }}
             onCloseClick={() => {
               setSelected(null)

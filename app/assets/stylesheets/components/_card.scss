@@ -2,6 +2,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  height: 90vh;
+  overflow-y: scroll;
 }
 
 .card-info {
@@ -11,4 +13,11 @@
   padding: 1rem;
   max-width: 20rem;
   min-height: 25rem;
+  &-title {
+    font-size: 1em;
+  }
+  &-address {
+    font-size: .5em;
+  }
+
 }

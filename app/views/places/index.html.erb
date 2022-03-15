@@ -1,17 +1,18 @@
-<h1>Work Spaces for Digital Nomads</h1>
-<%= react_component("Map", {
+<div class="d-flex w-100">
+  <%= react_component("Map", {
   googleApiKey: @google_api_key,
   center: @map_center,
   zoom: @map_zoom,
   markers: [@markers]
-}) %>
-<div class="card-container">
-  <% Place.all.each do |place| %>
-    <%= react_component("PlaceCard", {
+  }) %>
+  <div class="card-container">
+    <% Place.all.each do |place| %>
+      <%= react_component("PlaceCard", {
       imgSrc: image_url("placeholder-restaurant.png"),
       url: place_path(place),
       name: place.name,
       address: place.address
     }) %>
-  <% end %>
+    <% end %>
+  </div>
 </div>
