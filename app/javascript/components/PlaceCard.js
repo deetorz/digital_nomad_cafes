@@ -7,6 +7,13 @@ const PlaceCard = (props) => {
       <hr/>
       <a href={props.url} className="card-info-title my-4">{props.name}</a>
       <p className="card-info-address">{props.address}</p>
+      <p className="card-info-address">
+        Wifi: {props.wifi ? 'O' : 'X'}
+      </p>
+      <p className="card-info-address">
+        Power: {props.power ? 'O' : 'X'}
+      </p>
+
     </div>
   )
 }
