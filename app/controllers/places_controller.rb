@@ -9,7 +9,9 @@ class PlacesController < ApplicationController
         lat: place.latitude,
         lng: place.longitude,
         name: place.name,
-        address: place.address
+        address: place.address,
+        wifi: place.wifi,
+        power: place.power
       }
     end
 
