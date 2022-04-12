@@ -2,16 +2,17 @@ import {
   GoogleMap,
   InfoWindow,
   Marker,
-  MarkerClusterer,
+  MarkerClusterer
 } from "@react-google-maps/api";
 import React, { useEffect, useState } from "react";
+// import places from "./dataset.json";
+// import populateDatabase from "./populateDatabase";
 
 const containerStyle = {
-  width: "33vw",
+  width: "40vw",
+  minWidth: 300,
   height: "90vh",
 };
-
-let infoWindowContent = [];
 
 const Map = (props) => {
   const [position, setPosition] = useState({
@@ -41,81 +42,6 @@ const Map = (props) => {
     }
   }
 
-  async function fetchPlaceDetails(map, placeName) {
-    let service = new google.maps.places.PlacesService(map);
-
-    const placeData = await getPlaceId(service, placeName);
-
-    const placeId = placeData.place_id;
-
-    const infoWindowData = await getPlaceDetails(service, placeId)
-
-    if (infoWindowContent.length > 0) {
-      infoWindowContent.pop()
-    }
-
-    infoWindowContent.push(infoWindowData)
-
-    // Check console for available data when clicking marker
-    console.log(infoWindowContent[0])
-
-    const infoWindowEl = document.getElementById('infoWindowEl')
-    infoWindowEl.innerHTML = ''
-
-    // Inserting HTML works but need to find a way to set loading in state to prevent the info window from trying to render the content before it's ready
-    infoWindowEl.innerHTML = `
-      <img src="${infoWindowContent[0].photos[0].getUrl()}" class="w-100">
-      <a href="${infoWindowContent[0].website}" target="_blank">Website</a>
-    `
-  }
-
-  function getPlaceId(service, placeName) {
-    let coords = [];
-
-    let request = {
-      query: placeName,
-      fields: ["name", "place_id"],
-    };
-
-    return new Promise((resolve, reject) => {
-      service.findPlaceFromQuery(request, (results, status) => {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          for (let i = 0; i < results.length; i++) {
-            coords.push(results[i]);
-          }
-
-          resolve(coords[0]);
-        }
-      });
-    });
-  }
-
-  function getPlaceDetails(service, placeId) {
-    let placeDetails;
-
-    const detailsRequest = {
-      placeId,
-      fields: [
-        "photo",
-        "opening_hours",
-        "website",
-        "rating",
-        "user_ratings_total",
-      ],
-    };
-
-    return new Promise((resolve, reject) => {
-      service.getDetails(detailsRequest, (results, status) => {
-        if (status == google.maps.places.PlacesServiceStatus.OK) {
-          placeDetails = results
-        }
-
-        resolve(placeDetails)
-      });
-
-    })
-  }
-
   return (
     <GoogleMap
       mapContainerStyle={containerStyle}
@@ -134,9 +60,11 @@ const Map = (props) => {
                 lng: marker.lng,
               }}
               clusterer={clusterer}
-              onClick={() => {
+              onClick={async () => {
                 setSelected(marker);
-                fetchPlaceDetails(mapObject, marker.name);
+                // for (let i = 135; i < places.length; i++) {
+                //   await populateDatabase(mapObject, places[i]);
+                // }
               }}
             />
           ))
@@ -149,14 +77,10 @@ const Map = (props) => {
           onCloseClick={() => {
             setSelected(null);
           }}
+          options={{ minWidth: 240 }}
         >
-          <div style={{ maxWidth: 120 }}>
+          <div className="w-100">
             <p>{selected.name}</p>
-            <div className="mb-2">
-              <i className={(selected.wifi ? 'fa-solid fa-wifi' : 'fa-solid fa-wifi-slash') + ' mr-2'}></i>
-              <i className={selected.power ? 'fa-solid fa-plug-circle-check' : 'fa-solid fa-plug-circle-xmark'}></i>
-            </div>
-            <div id="infoWindowEl"></div>
           </div>
         </InfoWindow>
       ) : null}
